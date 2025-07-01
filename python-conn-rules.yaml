@@ -1,0 +1,110 @@
+rules:
+  - id: python-api-call-requests-get
+    pattern: requests.get($URL, ...)
+    message: HTTP GET request using requests.
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: connectivity
+      technology: requests
+      confidence: high
+
+  - id: python-api-call-requests-post
+    pattern: requests.post($URL, ...)
+    message: HTTP POST request using requests.
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: connectivity
+      technology: requests
+      confidence: high
+
+  - id: python-api-call-urllib
+    pattern: urllib.request.urlopen($URL)
+    message: HTTP call using urllib.
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: connectivity
+      technology: urllib
+      confidence: medium
+
+  - id: python-api-call-httpclient
+    pattern: http.client.HTTPConnection($HOST)
+    message: HTTP connection using http.client.
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: connectivity
+      technology: http.client
+      confidence: medium
+
+  - id: python-database-connection-sqlite
+    pattern: sqlite3.connect($DB)
+    message: SQLite database connection detected.
+    languages: [python]
+    severity: WARNING
+    metadata:
+      category: database
+      technology: sqlite
+      confidence: high
+
+  - id: python-imports-for-requests
+    pattern: import requests
+    message: requests library imported.
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: connectivity
+      technology: requests
+      confidence: low
+
+  - id: python-spotipy-import
+    pattern: import spotipy
+    message: Spotipy library imported (Spotify API usage).
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: connectivity
+      technology: spotipy
+      confidence: high
+
+  - id: python-spotipy-current-user-top-tracks
+    pattern: $SPOTIPY.current_user_top_tracks(...)
+    message: Spotify API call - current user's top tracks.
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: api
+      technology: spotipy
+      confidence: high
+
+  - id: python-spotipy-track-search
+    pattern: $SPOTIPY.search(...)
+    message: Spotify API call - track/artist search.
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: api
+      technology: spotipy
+      confidence: high
+
+  - id: python-spotipy-artist-top-tracks
+    pattern: $SPOTIPY.artist_top_tracks(...)
+    message: Spotify API call - artist's top tracks.
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: api
+      technology: spotipy
+      confidence: high
+
+  - id: python-spotipy-track-details
+    pattern: $SPOTIPY.track(...)
+    message: Spotify API call - get track details.
+    languages: [python]
+    severity: INFO
+    metadata:
+      category: api
+      technology: spotipy
+      confidence: high

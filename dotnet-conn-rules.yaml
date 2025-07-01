@@ -1,0 +1,59 @@
+rules:
+  - id: csharp-database-mysql-connection
+    patterns:
+      - pattern: |
+          using MySql.Data.MySqlClient;
+      - pattern: |
+          MySqlConnection $CONN = new MySqlConnection($ARGS);
+    message: MySQL database connection detected.
+    metadata:
+      category: security
+      technology: mysql
+      confidence: high
+      cwe: "CWE-305: Authentication Issues"
+    severity: WARNING
+    languages: [csharp]
+
+  - id: csharp-database-sqlclient-connection
+    pattern: |
+      SqlConnection $CONN = new SqlConnection($ARGS);
+    message: SQL Server database connection detected.
+    metadata:
+      category: security
+      technology: sqlserver
+      confidence: high
+      cwe: "CWE-305: Authentication Issues"
+    severity: WARNING
+    languages: [csharp]
+
+  - id: csharp-api-httpclient-call
+    pattern: |
+      await $CLIENT.GetAsync($URL);
+    message: External HTTP GET API call detected via HttpClient.
+    metadata:
+      category: connectivity
+      technology: httpclient
+      confidence: medium
+    severity: INFO
+    languages: [csharp]
+
+  - id: csharp-api-webrequest-call
+    pattern: |
+      WebRequest.Create($URL);
+    message: External API call detected via WebRequest.
+    metadata:
+      category: connectivity
+      technology: webrequest
+      confidence: medium
+    severity: INFO
+    languages: [csharp]
+
+  - id: csharp-imports-for-db
+    pattern: |
+      using System.Data.SqlClient;
+    message: SQL Client usage detected via import statement.
+    metadata:
+      category: connectivity
+      confidence: low
+    severity: INFO
+    languages: [csharp]

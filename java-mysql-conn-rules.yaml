@@ -1,0 +1,14 @@
+rules:
+  - id: detect-mysql-connection
+    patterns:
+      - pattern: |
+          DriverManager.getConnection(...)
+    message: "Detected MySQL connection usage with DriverManager"
+    languages: [java]
+    severity: INFO
+
+  - id: detect-import-sql-connection
+    pattern: import java.sql.Connection;
+    message: "Importing java.sql.Connection (possible DB usage)"
+    languages: [java]
+    severity: INFO
