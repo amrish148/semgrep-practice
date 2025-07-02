@@ -1,3 +1,4 @@
+import json
 from fastapi import FastAPI, Form
 from fastapi.responses import JSONResponse
 import subprocess
@@ -21,6 +22,6 @@ def scan_local_repo(
             ["semgrep", "--json", "--config", config_path, code_path],
             capture_output=True, text=True, check=True
         )
-        return JSONResponse(content=result.stdout)
+        return JSONResponse(content=json.loads(result.stdout))
     except subprocess.CalledProcessError as e:
         return JSONResponse(status_code=500, content={"error": e.stderr})
